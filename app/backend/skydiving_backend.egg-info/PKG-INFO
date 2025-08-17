@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: skydiving_backend
+Version: 0.1.0
+Summary: Backend for the skydiving scheduler.
+Requires-Python: >=3.11

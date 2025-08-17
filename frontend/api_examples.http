@@ -1,0 +1,38 @@
+### Signup as a new mentee
+POST http://localhost:8000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "new.mentee@example.com",
+    "name": "New Mentee",
+    "password": "password",
+    "role": "mentee",
+    "mentee_profile": {
+        "goals": "Learn to fly!"
+    }
+}
+
+### Login to get a token
+# Note: The API sets an httpOnly cookie for the token,
+# but also returns it in the body for use in tools like this.
+POST http://localhost:8000/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=new.mentee@example.com&password=password
+
+###
+# Save the token for subsequent requests
+@token = {{login.response.body.access_token}}
+
+### Get current user details
+GET http://localhost:8000/auth/me
+Authorization: Bearer {{token}}
+
+### Get all progression steps
+GET http://localhost:8000/progression/steps
+Authorization: Bearer {{token}}
+
+### Get sessions for a specific date
+# @prompt date
+GET http://localhost:8000/sessions?date=2024-08-24
+Authorization: Bearer {{token}}
